@@ -25,7 +25,7 @@ The four pillars are standing sections and come back every week in the same orde
 - Plain, simple English. The author isn't a native speaker, so write clear, everyday wording, not polished consultant English. Short words beat clever ones.
 - British/Swiss spelling: organisation, programme, licence (noun), licensed (verb), prioritise, behaviour.
 - Use contractions (it's, don't, won't, you'll). Without them the text sounds stiff.
-- Dry humour is fine, used sparingly. Never sarcasm about people, teams or vendors' staff.
+- Dry humour and occasional light sarcasm are welcome, two to four touches per edition. Aim them at situations, defaults, vendor habits and licensing absurdities. Sarcasm about people (colleagues, admins, readers, vendors' staff) is still out, and a joke never replaces a fact.
 - Talk to the reader as a peer: say what changes, what it costs or risks, and what to do.
 - Dates as "9 December" or "1 February 2027". Times in Swiss time (CET/CEST).
 

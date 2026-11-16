@@ -37,6 +37,7 @@ a { color: inherit; }
 .secnum { font-size: 13px; font-weight: 700; line-height: 1; color: var(--red); letter-spacing: .08em; font-variant-numeric: tabular-nums; }
 .hero { margin-top: 64px; }
 h1 { margin: 0; font-size: clamp(44px, 7vw, 92px); font-weight: 700; line-height: .95; letter-spacing: -.045em; }
+.ednote { margin: 20px 0 0; color: var(--faint); }
 .trade { padding: 20px 0 24px; }
 .trade .k { font-size: 15px; font-weight: 700; }
 .trade.decision .k { color: var(--red); }

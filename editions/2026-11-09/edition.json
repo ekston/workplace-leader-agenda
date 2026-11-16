@@ -1,0 +1,356 @@
+{
+  "date": "2026-11-09",
+  "date_long": "November 9, 2026",
+  "kw": "46",
+  "pubdate_rfc822": "Mon, 09 Nov 2026 07:00:00 +0100",
+  "note": "Published retroactively on 16 November 2026.",
+  "tradeoff_title": "The 'Agentic Sprawl' vs. Centralised Governance Trap",
+  "headline_html": "The ‘agentic sprawl’<br><span class=\"red\">vs.</span> centralised governance trap.",
+  "summary": "Business units are building their own Copilot Studio agents faster than IT can track them, and each one is a new identity with access to company data. Freeze ad-hoc agent publishing and put every autonomous workflow under a credit budget and explicit Conditional Access, with a governed sandbox for the teams that want to keep building.",
+  "tradeoff": [
+    [
+      "The Tension",
+      "Business units are building their own Copilot Studio agents and LLM workflows, mostly because that's quicker than waiting for IT. It's good for speed. It also creates non-human identities nobody tracks, and agents that reach into SharePoint through API calls nobody reviewed. Microsoft's own documentation says Conditional Access doesn't apply when an agent uses an API key, and that policies aimed at 'all users' don't cover agent user accounts. For FINMA-regulated firms there's a second problem. Circular 2023/1 expects a complete, current inventory of ICT assets, and an agent nobody registered isn't in it."
+    ],
+    [
+      "The Leadership Call",
+      "Do we lock down agent creation centrally and accept more shadow AI, plus some grumbling in the business units? Or do we build a governed sandbox where business units can still create agents quickly, inside automatic guardrails?"
+    ],
+    [
+      "The Decision",
+      "Freeze ad-hoc agent publishing now. By the end of the month, every autonomous workflow in the tenant should draw on a governed Copilot Credit budget and run under explicit Entra Conditional Access scopes. Teams that want to build can keep building, in the sandbox."
+    ]
+  ],
+  "figures": [
+    [
+      "8",
+      "Signals passed the gate",
+      false
+    ],
+    [
+      "3",
+      "High severity",
+      false
+    ],
+    [
+      "4",
+      "Pillars",
+      false
+    ],
+    [
+      "3",
+      "Calls to make",
+      false
+    ],
+    [
+      "$69–90",
+      "Per user per month, USD list, before credits",
+      true
+    ]
+  ],
+  "pillars": [
+    {
+      "n": "1",
+      "mark": "meter",
+      "tag": "Budget",
+      "name": "Financial & Licensing Realities",
+      "subtitle": "What an AI seat really costs",
+      "reality": "Since 1 July 2026, Microsoft 365 E3 lists at $39 and E5 at $60 per user per month, and the Microsoft 365 Copilot add-on costs another $30. Agents and other metered features then use Copilot Credits, either pay-as-you-go at $0.01 each or from a prepaid annual pool bought at a 5–20% discount. So at Microsoft's USD list prices a Copilot user costs about $69 to $90 a month before the first credit is spent. Swiss contract prices will differ.",
+      "action": "Pull the Copilot usage report and look at weekly active use per paid seat. Independent write-ups put weekly use at 20–30% of paid seats, but that's a secondary estimate, so trust your own numbers first. Before the next billing cycle, move idle licences from low-use groups to roles that actually use them, such as analysts and engineers.",
+      "sources": [
+        [
+          "Microsoft 365 pricing update",
+          "price"
+        ],
+        [
+          "Copilot pricing",
+          "copilotprice"
+        ],
+        [
+          "Copilot Credits Guide, Oct 2026",
+          "credits"
+        ],
+        [
+          "Copilot Credit P3",
+          "p3"
+        ],
+        [
+          "Usage estimate (weak)",
+          "usage"
+        ]
+      ]
+    },
+    {
+      "n": "2",
+      "mark": "frame",
+      "tag": "Risk",
+      "name": "Governance & Data Hygiene",
+      "subtitle": "Oversharing meets AI search",
+      "reality": "Copilot only shows people what they already have access to, so the weak spot is the permissions underneath. Semantic search makes it easy to find old HR files, salary spreadsheets and forgotten project folders on flat SharePoint sites that were technically open all along. Under the nFADP, salary data open to the whole company was already a data security problem. Copilot just makes it easier to notice.",
+      "action": "Ask SecOps and Information Protection to start with the weekly data risk assessment that Purview DSPM for AI already runs on your top 100 SharePoint sites. Fix stale and unmanaged permissions first, then apply sensitivity labels to historical repositories. Locking down Copilot itself achieves little while the permissions stay wide open.",
+      "sources": [
+        [
+          "DSPM for AI",
+          "dspm"
+        ],
+        [
+          "Oversharing assessments",
+          "overshare"
+        ],
+        [
+          "nFADP",
+          "nfadp"
+        ]
+      ]
+    },
+    {
+      "n": "3",
+      "mark": "pulse",
+      "tag": "DEX",
+      "name": "Digital Employee Experience",
+      "subtitle": "Faster attacks, fragile updates",
+      "reality": "Endpoint teams are squeezed from two sides. Google reports that vulnerability disclosures have doubled to about 10,000 a month, with AI helping, and that attackers now exploit known flaws faster. Meanwhile the October cumulative update KB5127648 brought its own trouble. Admins report boot failures on some Dell devices, which Microsoft hasn't listed as a known issue. Microsoft does document a Remote Desktop error for non-admin users and a stricter NTLMv1 default that can affect Wi-Fi, Ethernet and VPN connections using MS-CHAPv2.",
+      "action": "Patching doesn't have to be all-or-nothing. Check that your pilot ring contains the hardware you really run, including Dell models and VDI hosts, so it finds regressions before everyone else does. A ring made only of IT's own laptops mostly tests IT's own laptops.",
+      "sources": [
+        [
+          "Google Threat Intelligence",
+          "gtig"
+        ],
+        [
+          "The Record",
+          "record"
+        ],
+        [
+          "KB5127648",
+          "kb"
+        ],
+        [
+          "Microsoft Q&A (community)",
+          "dellqa"
+        ],
+        [
+          "Tech Community (community)",
+          "tcthread"
+        ]
+      ]
+    },
+    {
+      "n": "4",
+      "mark": "rings",
+      "tag": "Culture",
+      "name": "Culture, Adoption & Change Velocity",
+      "subtitle": "Beyond the licence count",
+      "reality": "Buying seats is the easy part. In many organisations middle managers don't yet trust automated summaries, and few teams have agreed how they'd measure a redesigned process, so adoption stalls after the launch email. The weekly-use estimate in Pillar 1 points the same way.",
+      "action": "Report success as cycle-time reduction in a few chosen processes, such as customer onboarding or compliance reporting, and drop 'licences assigned' as the headline number. Peer champions who show their own work will do more than another generic how-to video.",
+      "sources": [
+        [
+          "Usage estimate (weak)",
+          "usage"
+        ],
+        [
+          "Copilot pricing",
+          "copilotprice"
+        ]
+      ]
+    }
+  ],
+  "calls": [
+    [
+      "CISO / Security Architect",
+      "Check that controls for non-human identities and agent-targeted Conditional Access are really switched on, so data can't leave through third-party plugins nobody monitors. If you use Agent 365, its agent IDs and policy templates are worth a look."
+    ],
+    [
+      "Finance / Procurement Lead",
+      "Look at the Azure meter for Copilot Credits together. Agent workloads are spiky, and a spiky meter without a spending limit tends to show up in the budget review."
+    ],
+    [
+      "DEX / Endpoint Lead",
+      "Did the last cumulative update reach the pilot ring's Dell devices and VDI hosts before it reached everyone else? If the answer is 'we'll check', check this week."
+    ]
+  ],
+  "antipattern_head": "Stop measuring AI success by deployment scale.",
+  "antipattern_body": "Handing out licences to hit an adoption quota, without tying people to specific workflows, buys expensive shelfware. Put governance and training effort where you can measure cycle time going down.",
+  "cliffs": [
+    [
+      "09.11.2026",
+      "Unpublished Copilot Chat limits reach larger tenants (smaller tenants since 2 November)",
+      "MC1536158 · MC1536163",
+      true
+    ],
+    [
+      "23.11.2026",
+      "Cross-tenant calendar sharing via Cross-Tenant Access Policy fully rolled out",
+      "MC1446796",
+      false
+    ],
+    [
+      "12.01.2027",
+      "Windows Server 2016 end of extended support; paid ESU available",
+      "Windows Server blog",
+      true
+    ],
+    [
+      "01.04.2027",
+      "Final EWS shutdown in Exchange Online",
+      "MC1446796",
+      false
+    ]
+  ],
+  "items": [
+    {
+      "title": "Microsoft 365 E3 now lists at $39 and E5 at $60; the Copilot add-on stays at $30",
+      "feed": "Microsoft licensing",
+      "lenses": [
+        "Budget"
+      ],
+      "severity": "High",
+      "deadline": "In effect since 1 Jul 2026, at renewal",
+      "sortDate": "2026-07-01",
+      "teams": "Finance, Procurement, IT",
+      "mc": "",
+      "sowhat": "The July price rise (E3 from $36 to $39, E5 from $57 to $60, USD list) reaches existing customers at their next renewal. Add the $30 Copilot add-on and a Copilot user costs about $69 to $90 a month before metered credits.",
+      "action": "Model renewals with the new suite prices plus Copilot. Decide which groups really need Copilot before the renewal, not after.",
+      "url": "price",
+      "site": "microsoft.com"
+    },
+    {
+      "title": "Copilot Credits: $0.01 pay-as-you-go, or a prepaid annual pool at 5–20% off",
+      "feed": "Microsoft licensing",
+      "lenses": [
+        "Budget",
+        "Risk"
+      ],
+      "severity": "High",
+      "deadline": "None announced",
+      "sortDate": "2099-01-01",
+      "teams": "Finance, Procurement, IT",
+      "mc": "",
+      "sowhat": "Agents and other metered features bill in Copilot Credits, pooled at tenant level. Pay-as-you-go runs at $0.01 per credit and is billed in arrears through Azure. Microsoft's usage-based billing documentation, last updated on 3 November, describes spending policies with limits and alerts in the Microsoft 365 admin center.",
+      "action": "Find out which Azure subscription the credits bill to and who can change it. Set spending limits and alerts before agent use grows, and only size a prepaid pool once you've seen a few months of real usage.",
+      "url": "credits",
+      "site": "microsoft.com"
+    },
+    {
+      "title": "Conditional Access aimed at 'all users' doesn't cover agent user accounts, and API keys bypass it",
+      "feed": "Entra/Security",
+      "lenses": [
+        "Risk"
+      ],
+      "severity": "High",
+      "deadline": "None announced",
+      "sortDate": "2099-01-02",
+      "teams": "Security, IT",
+      "mc": "",
+      "sowhat": "Microsoft's documentation says policies scoped through 'Users' don't apply to agent user accounts, whether they target all users, groups or roles. Agents that reach resources with an API key skip Entra token issuance, so Conditional Access never sees them.",
+      "action": "Create policies that target agent users explicitly, starting in report-only mode. Ask agent builders which agents use API keys, and treat each one as a finding.",
+      "url": "caAgents",
+      "site": "learn.microsoft.com"
+    },
+    {
+      "title": "Agent 365 as the control plane for agents: registry, agent IDs and policy templates",
+      "feed": "Microsoft announcement",
+      "lenses": [
+        "Risk"
+      ],
+      "severity": "Medium",
+      "deadline": "Announced Nov 2025",
+      "sortDate": "2099-01-03",
+      "teams": "Security, IT",
+      "mc": "",
+      "sowhat": "Announced at Ignite 2025 and first offered through the Frontier programme, Agent 365 gives every agent its own ID, keeps a registry of agents across platforms and offers policy templates for access control.",
+      "action": "If you use it, compare its registry count with what the business units think they've built.",
+      "url": "a365",
+      "site": "microsoft.com"
+    },
+    {
+      "title": "Purview DSPM for AI runs a weekly oversharing assessment on the top 100 SharePoint sites",
+      "feed": "Microsoft Learn",
+      "lenses": [
+        "Risk",
+        "Friction"
+      ],
+      "severity": "Medium",
+      "deadline": "None",
+      "sortDate": "2099-01-04",
+      "teams": "Security, Legal, HR, IT",
+      "mc": "",
+      "sowhat": "Without any setup, DSPM for AI assesses the 100 most-used SharePoint sites each week for oversharing. Its remediation options include restricting Copilot by sensitivity label, Restricted Content Discovery, auto-labelling and deleting content that hasn't been accessed for three years or more.",
+      "action": "Start with the default assessment's results. Fix permissions on HR and finance sites first, because that's where nFADP exposure is highest.",
+      "url": "dspm",
+      "site": "learn.microsoft.com"
+    },
+    {
+      "title": "October update KB5127648: Dell boot failures reported, RDP error and stricter NTLMv1 default documented",
+      "feed": "Community sentiment",
+      "lenses": [
+        "Friction",
+        "Risk"
+      ],
+      "severity": "Medium",
+      "deadline": "Fixes rolling into later updates",
+      "sortDate": "2026-10-13",
+      "teams": "IT, Helpdesk",
+      "mc": "",
+      "sowhat": "Admins on Microsoft Q&A and Tech Community report boot failures on some Dell devices after the October update, which Microsoft hasn't listed as a known issue. Microsoft documents a Remote Desktop error for non-admin users (0xC000000D) and a change to Enforce mode for blocking NTLMv1-derived credentials that can affect MS-CHAPv2 Wi-Fi, Ethernet and VPN connections.",
+      "action": "Add the affected Dell models and VDI hosts to the pilot ring. Check whether any Wi-Fi or VPN still relies on MS-CHAPv2 before the next update reaches everyone.",
+      "url": "kb",
+      "site": "support.microsoft.com"
+    },
+    {
+      "title": "Google: vulnerability disclosures doubled to about 10,000 a month, and known flaws are exploited faster",
+      "feed": "Analyst/C-suite",
+      "lenses": [
+        "Risk",
+        "Friction"
+      ],
+      "severity": "Medium",
+      "deadline": "None",
+      "sortDate": "2099-01-05",
+      "teams": "Security, IT",
+      "mc": "",
+      "sowhat": "Google's 30 September report links the jump in disclosures to AI-assisted discovery. Zero-day exploitation rose more modestly, from 8 to 11 a month through August 2026. The bigger change is how quickly attackers weaponise flaws that are already public.",
+      "action": "Shorten the time from patch release to the broad ring for internet-facing systems. Keep the pilot ring, but make it quicker.",
+      "url": "gtig",
+      "site": "cloud.google.com"
+    },
+    {
+      "title": "Independent estimates: 20–30% of paid Copilot seats are used weekly",
+      "feed": "Analyst/C-suite",
+      "lenses": [
+        "Budget",
+        "Friction"
+      ],
+      "severity": "Low",
+      "deadline": "None",
+      "sortDate": "2099-01-06",
+      "teams": "IT, Finance, HR",
+      "mc": "",
+      "sowhat": "A June 2026 write-up summarising surveys and channel data puts weekly use at 20–30% of paid seats. It's a secondary source, so treat it as a rough benchmark rather than a fact about your tenant.",
+      "action": "Compare it with your own Copilot usage report over 28 days and look at weekly active users, not one-off tries.",
+      "url": "usage",
+      "site": "valueaddvc.com"
+    }
+  ],
+  "discarded": "Individual Copilot feature releases, admin-centre UI changes and routine monthly patch notes without a known regression. Routine admin work with no strategic trade-off.",
+  "method": "Phillip Büchler's draft of 9 November 2026, rewritten and fact-checked on 16 November 2026 using only sources published by 9 November 2026. Prices are Microsoft's USD list prices; we found no Swiss franc list price to quote. The draft's '$66 to $90+' used the old E3 price and is corrected to about $69 to $90. Its '20–30% active daily usage' is reported as weekly use of paid seats, from a secondary write-up (weak source). The 'surge in zero-days through late 2026' is replaced by Google's data on doubled disclosures and faster exploitation of known flaws, because Google counts zero-days rising only from 8 to 11 a month. 'Agent Guardrails' isn't a Microsoft product name, so the edition describes Agent 365's controls instead. The spending-policy documentation we cite was last updated on 3 November; we couldn't confirm when credit pools and spending policies first appeared in tenants. Middle-management resistance in Pillar 4 is the author's assessment, not a sourced figure. Dell boot failures after KB5127648 are community reports, not a Microsoft known issue.",
+  "urls": {
+    "price": "https://www.microsoft.com/en-us/licensing/news/2026-m365-packaging-pricing-updates",
+    "copilotprice": "https://www.microsoft.com/en-us/copilot/pricing/enterprise",
+    "credits": "https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/microsoft/bade/documents/products-and-services/en-us/ai/Copilot-Credits-Guide.pdf",
+    "p3": "https://learn.microsoft.com/en-us/azure/cost-management-billing/reservations/copilot-credit-p3",
+    "ubb": "https://learn.microsoft.com/en-us/copilot/plan/usage-based-billing-overview-copilot-credits",
+    "usage": "https://valueaddvc.com/blog/microsoft-copilot-enterprise-adoption-what-the-data-shows-about-real-usage-vs-hype",
+    "caAgents": "https://learn.microsoft.com/en-us/entra/identity/conditional-access/agent-id",
+    "a365": "https://www.microsoft.com/en-us/copilot/blog/2025/11/18/microsoft-agent-365-the-control-plane-for-ai-agents/",
+    "dspm": "https://learn.microsoft.com/en-us/purview/dspm-for-ai",
+    "overshare": "https://learn.microsoft.com/en-us/purview/data-security-posture-management-oversharing",
+    "kb": "https://support.microsoft.com/en-us/servicing/os/windows-11/2026/10/kb5127648-windows-11-24h2-25h2-26h2-security-update",
+    "dellqa": "https://learn.microsoft.com/en-us/answers/questions/6053360/boot-failure-0xc000000d-on-some-dell-devices-after",
+    "tcthread": "https://techcommunity.microsoft.com/discussions/windows11/october-2026-windows-update-causing-major-issues/4566257",
+    "gtig": "https://cloud.google.com/blog/topics/threat-intelligence/vulnerability-discovery-and-exploitation-trends-in-the-ai-era",
+    "record": "https://therecord.media/google-vulnerabilities-cyberattacks-ai",
+    "finma": "https://www.finma.ch/en/~/media/finma/dokumente/dokumentencenter/myfinma/rundschreiben/finma-rs-2023-01-20221207.pdf",
+    "nfadp": "https://www.fedlex.admin.ch/eli/cc/2022/491/en",
+    "ws2016": "https://www.microsoft.com/en-us/windows-server/blog/2026/02/25/planning-ahead-for-windows-server-2016-end-of-support/"
+  }
+}

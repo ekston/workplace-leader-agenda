@@ -121,13 +121,14 @@ def sechead(num, kicker, title, aside=""):
 </div>
 """
 
-def edition_body(ed, prefix, permalink):
+def edition_body(ed, prefix, permalink, current="latest"):
     o = []
-    o.append(mast(prefix, f'{e(ed["date_long"])} · KW {ed["kw"]} · Europe/Zurich', "latest"))
+    o.append(mast(prefix, f'{e(ed["date_long"])} · KW {ed["kw"]} · Europe/Zurich', current))
     # 01 Big Trade-Off
+    note = f'<p class="label ednote">{e(ed["note"])}</p>' if ed.get("note") else ""
     o.append(f"""<section class="row hero" aria-labelledby="tradeoff">
   <div class="l"><div class="secnum">01</div><div style="margin-top:10px">{kick("square", "The Big Trade-Off", True)}</div></div>
-  <div class="r"><h1 id="tradeoff">{ed["headline_html"]}</h1></div>
+  <div class="r"><h1 id="tradeoff">{ed["headline_html"]}</h1>{note}</div>
 </section>
 <div style="margin-top:56px">
 """)
@@ -237,7 +238,7 @@ def main():
     for i, ed in enumerate(eds):
         permalink = f'{SITE}editions/{ed["date"]}/'
         title = f'{ed["tradeoff_title"]} · {TITLE}, {ed["date_long"]}'
-        write(f'editions/{ed["date"]}/index.html', head(title, ed["summary"], "../../", permalink) + edition_body(ed, "../../", permalink))
+        write(f'editions/{ed["date"]}/index.html', head(title, ed["summary"], "../../", permalink) + edition_body(ed, "../../", permalink, "latest" if i == 0 else "archive"))
     latest = eds[0]
     permalink = f'{SITE}editions/{latest["date"]}/'
     write("index.html", head(f'{TITLE}: {latest["tradeoff_title"]}', latest["summary"], "", permalink) + edition_body(latest, "", permalink))

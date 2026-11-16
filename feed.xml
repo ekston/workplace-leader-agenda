@@ -15,5 +15,12 @@
       <pubDate>Mon, 16 Nov 2026 07:00:00 +0100</pubDate>
       <description>Over the next ten weeks Microsoft switches on AI features and AI spending unless someone says no. Claude arrives in Swiss and EU tenants on 9 December. Metered Copilot experiences show up from January, and pay-as-you-go billing for Copilot Business follows in Q1 2027. Each setting needs a decision and an owner before its date.</description>
     </item>
+    <item>
+      <title>The &#x27;Agentic Sprawl&#x27; vs. Centralised Governance Trap</title>
+      <link>https://workplaceleaders.ch/editions/2026-11-09/</link>
+      <guid isPermaLink="true">https://workplaceleaders.ch/editions/2026-11-09/</guid>
+      <pubDate>Mon, 09 Nov 2026 07:00:00 +0100</pubDate>
+      <description>Business units are building their own Copilot Studio agents faster than IT can track them, and each one is a new identity with access to company data. Freeze ad-hoc agent publishing and put every autonomous workflow under a credit budget and explicit Conditional Access, with a governed sandbox for the teams that want to keep building.</description>
+    </item>
   </channel>
 </rss>

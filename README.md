@@ -17,6 +17,10 @@ Plain HTML and CSS with a little vanilla JS for the appendix filters. No framewo
 | `CNAME` | `workplaceleaders.ch` |
 | `tools/build.py` | Optional helper that regenerates the HTML and feed from the JSON files |
 
+## Editorial guide
+
+Every weekly run follows [STYLE.md](STYLE.md): audience, voice, Swiss angles (FINMA, nFADP, Swiss/EU tenant), fact rules and the AI-pattern check to do before publishing.
+
 ## Adding a weekly edition
 
 1. Copy the latest folder, e.g. `cp -r editions/2026-11-16 editions/2026-11-23`, and delete the copied `index.html`.

@@ -96,8 +96,18 @@ def mast(prefix, right_left, current):
 </header>
 """
 
-def foot(left):
-    return f"""<footer class="hair foot label"><span>{left}</span><span>No cookies, no tracking.</span></footer>
+AUTHOR = "Phillip Büchler"
+AUTHOR_SITE = "https://ekston.ch"
+
+def foot(prefix, edition=""):
+    ed = f'<span class="label">{e(edition)}</span>' if edition else ""
+    return f"""<footer class="foot">
+  <div class="fl"><span class="label ink">{TITLE}</span>{ed}</div>
+  <div class="fr">
+    <span class="by">By {AUTHOR} · <a class="src" href="{AUTHOR_SITE}" rel="noopener">ekston.ch ↗</a></span>
+    <nav class="label fnav" aria-label="Footer"><a href="{prefix}archive/">Archive</a><a href="{prefix}feed.xml">RSS</a><span>No cookies, no tracking.</span></nav>
+  </div>
+</footer>
 </div>
 </body>
 </html>
@@ -208,7 +218,7 @@ def edition_body(ed, prefix, permalink):
     o.append(f'<div class="row hair-l" style="margin-top:24px;padding-top:14px"><div class="l label">Method</div><p class="r body small">{e(ed["method"])}</p></div>\n')
     o.append(f'<div class="row hair-l" style="margin-top:24px;padding-top:14px"><div class="l label">Permalink</div><p class="r body small"><a class="src" href="{permalink}">{permalink}</a></p></div>\n')
     o.append(f'<script src="{prefix}assets/filters.js" defer></script>\n')
-    o.append(foot(f'{TITLE} · KW {ed["kw"]} / {ed["date"][:4]}'))
+    o.append(foot(prefix, f'KW {ed["kw"]} / {ed["date"][:4]}'))
     return "".join(o)
 
 def write(path, text):
@@ -237,7 +247,7 @@ def main():
     write("archive/index.html", head(f"Archive · {TITLE}", "All editions of the " + TITLE + ".", "../", SITE + "archive/", "website")
           + mast("../", "All editions", "archive")
           + f'<section class="row hero"><div class="l">{kick("grid", "Archive")}</div><div class="r"><h1>All editions.</h1></div></section>\n<div style="margin-top:56px" class="hair"></div>\n' + rows
-          + foot(TITLE))
+          + foot("../"))
     # feed
     items = ""
     for ed in eds:
@@ -255,7 +265,8 @@ def main():
   <channel>
     <title>{TITLE}</title>
     <link>{SITE}</link>
-    <description>{e(TAGLINE)}</description>
+    <description>{e(TAGLINE)} By {AUTHOR}, ekston.ch.</description>
+    <copyright>© {eds[0]["date"][:4]} {AUTHOR}, ekston.ch</copyright>
     <language>en-ch</language>
     <lastBuildDate>{eds[0]["pubdate_rfc822"]}</lastBuildDate>
     <atom:link href="{SITE}feed.xml" rel="self" type="application/rss+xml"/>

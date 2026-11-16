@@ -118,7 +118,14 @@ h4 { margin: 8px 0 0; font-size: 22px; font-weight: 700; letter-spacing: -.02em;
 .meta > div { padding-top: 8px; font-size: 15px; line-height: 1.5; }
 .meta .wide { flex: 2 1 320px; } .meta .narrow { flex: 1 1 200px; }
 .small { font-size: 15px; color: var(--grey); }
-.foot { margin-top: 96px; padding-top: 12px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+.foot { margin-top: 96px; padding-top: 14px; border-top: 1px solid var(--rule); display: flex; flex-wrap: wrap; column-gap: 48px; row-gap: 12px; align-items: baseline; }
+.foot .fl { flex: 0 0 220px; min-width: 160px; display: flex; flex-direction: column; gap: 6px; }
+.foot .fr { flex: 1 1 520px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; align-items: baseline; }
+.foot .by { font-size: 13px; color: var(--grey); }
+.foot .by a { color: var(--ink); }
+.fnav { display: flex; flex-wrap: wrap; gap: 20px; }
+.fnav a { text-decoration: none; }
+.fnav a:hover { color: var(--ink); border-bottom: 1px solid var(--red); }
 
 .adate { font-size: 15px; font-weight: 700; font-variant-numeric: tabular-nums; }
 .arch { padding: 20px 0 24px; align-items: baseline; }

@@ -20,7 +20,7 @@ Plain HTML and CSS with a little vanilla JS for the appendix filters. No framewo
 ## Adding a weekly edition
 
 1. Copy the latest folder, e.g. `cp -r editions/2026-11-16 editions/2026-11-23`, and delete the copied `index.html`.
-2. Edit `editions/2026-11-23/edition.json`: `date`, `date_long`, `kw`, `pubdate_rfc822` (RFC 822, e.g. `Mon, 23 Nov 2026 07:00:00 +0100`), `tradeoff_title` (also the RSS item title), `headline_html`, `summary` (RSS description and meta description), then the trade-off, pillars, calls, anti-pattern, cliffs and items. Source keys are either a key in `urls` or `mc:MC1234567` for a Message Center post.
+2. Edit `editions/2026-11-23/edition.json`: `date`, `date_long`, `kw`, `pubdate_rfc822` (RFC 822, e.g. `Mon, 23 Nov 2026 07:00:00 +0100`), `tradeoff_title` (also the RSS item title), `headline_html`, `summary` (RSS description and meta description), then the trade-off, pillars, calls, anti-pattern, cliffs and items. The four pillars are standing sections defined once in `STANDING` in `tools/build.py` (tag, name, line mark, strapline, order); each edition only supplies `tag`, `subtitle`, `reality`, `action` and `sources` per pillar, and the build stops if one of the four is missing. Source keys are either a key in `urls` or `mc:MC1234567` for a Message Center post.
 3. Run `python3 tools/build.py` (Python 3 standard library only). It rewrites `index.html`, every `editions/*/index.html`, `archive/index.html` and `feed.xml`.
 4. Check locally with `python3 -m http.server` and open http://localhost:8000/.
 5. Commit and push to `main`. GitHub Pages publishes within a minute or two.

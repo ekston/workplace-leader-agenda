@@ -41,6 +41,26 @@ def url(ed, key):
         return "https://mc.merill.net/message/" + key[3:]
     return ed["urls"][key]
 
+# The four standing pillars. They recur every week in this order with the same
+# name, mark and strapline; an edition only supplies tag, subtitle, reality,
+# action and sources for each (matched by "tag").
+STANDING = [
+    {"tag": "Budget",  "slug": "budget",  "mark": "meter", "name": "Financial & Licensing Realities",     "strap": "Licences, credits and contracts"},
+    {"tag": "Risk",    "slug": "risk",    "mark": "frame", "name": "Governance & Data Hygiene",           "strap": "Identity, data and AI access"},
+    {"tag": "DEX",     "slug": "dex",     "mark": "pulse", "name": "Digital Employee Experience",         "strap": "What employees feel at the desk"},
+    {"tag": "Culture", "slug": "culture", "mark": "rings", "name": "Culture, Adoption & Change Velocity", "strap": "Adoption, habits and trust"},
+]
+
+def standing_pillars(ed):
+    by_tag = {p["tag"]: p for p in ed["pillars"]}
+    out = []
+    for st in STANDING:
+        p = by_tag.get(st["tag"])
+        if p is None:
+            raise SystemExit(f'edition {ed["date"]}: pillar "{st["tag"]}" missing')
+        out.append({**st, **{k: p[k] for k in ("subtitle", "reality", "action", "sources")}})
+    return out
+
 LENS = {"Budget": "Budget &amp; Commercial", "Risk": "Risk &amp; Governance", "Friction": "Workplace Friction"}
 
 def head(title, desc, prefix, canonical, og_type="article"):
@@ -96,7 +116,7 @@ def edition_body(ed, prefix, permalink):
     o.append(mast(prefix, f'{e(ed["date_long"])} · KW {ed["kw"]} · Europe/Zurich', "latest"))
     # 01 Big Trade-Off
     o.append(f"""<section class="row hero" aria-labelledby="tradeoff">
-  <div class="l"><div class="secnum">01</div><div style="margin-top:12px">{kick("square", "The Big Trade-Off", True)}</div></div>
+  <div class="l"><div class="secnum">01</div><div style="margin-top:10px">{kick("square", "The Big Trade-Off", True)}</div></div>
   <div class="r"><h1 id="tradeoff">{ed["headline_html"]}</h1></div>
 </section>
 <div style="margin-top:56px">
@@ -107,30 +127,43 @@ def edition_body(ed, prefix, permalink):
     o.append("</div>\n")
     figs = "".join(f'<div class="fig"><div class="v{" red" if red else ""}">{e(v)}</div><div class="label" style="margin-top:8px">{e(l)}</div></div>' for v, l, red in ed["figures"])
     o.append(f'<div class="row figs hair"><div class="l label" style="padding-top:12px">This week</div><div class="r">{figs}</div></div>\n')
-    # 02 Pillars
-    o.append(sechead("02", kick("grid", "The 4-Pillar Executive Agenda"), "Four pillars, one decision each."))
-    for p in ed["pillars"]:
+    # 02 Pillars: four standing departments, same template every week
+    pillars = standing_pillars(ed)
+    total = len(pillars)
+    o.append(sechead("02", kick("grid", "The 4-Pillar Executive Agenda"), "Four standing pillars, one decision each."))
+    strip = "".join(f"""<a class="pcell" href="#pillar-{e(p['slug'])}">
+    <span class="ptop"><span class="label kick ink">{mark(p['mark'], 16)}{e(p['tag'])}</span><span class="label pno">{i+1:02d}</span></span>
+    <span class="pcname">{e(p['name'])}</span>
+    <span class="pcsub">{e(p['subtitle'])}</span>
+  </a>""" for i, p in enumerate(pillars))
+    o.append(f'<nav class="pstrip" aria-label="The four pillars">\n  {strip}\n</nav>\n')
+    for i, p in enumerate(pillars):
         srcs = "".join(f'<a class="src" href="{e(url(ed, k))}" rel="noopener">{e(l)} ↗</a>' for l, k in p["sources"])
-        o.append(f"""<section class="row pillar hair">
-  <div class="l"><div class="pnum">{p["n"]}</div><div style="margin-top:18px">{kick(p["mark"], p["tag"])}</div><div class="pname">{e(p["name"])}</div></div>
-  <div class="r">
-    <h3>{e(p["subtitle"])}</h3>
-    <div class="cols">
-      <div class="hair-l"><div class="label">The Reality Check</div><p class="body">{e(p["reality"])}</p></div>
-      <div class="hair act"><div class="label red">The Leadership Action</div><p class="body">{e(p["action"])}</p></div>
-    </div>
-    <div class="srcline"><span class="label">Sources</span><span class="links">{srcs}</span></div>
+        o.append(f"""<section class="pillar" id="pillar-{e(p['slug'])}" aria-labelledby="pn-{e(p['slug'])}">
+  <header class="pmast">
+    <div class="ptag">{mark(p['mark'], 22)}<span class="label ink">{e(p['tag'])}</span></div>
+    <div class="ptitle"><h3 class="pname" id="pn-{e(p['slug'])}">{e(p['name'])}</h3><div class="pstrap">{e(p['strap'])}</div></div>
+    <div class="label pno">Pillar {i+1:02d} / {total:02d}</div>
+  </header>
+  <div class="pgrid pweek">
+    <div class="label">This week</div>
+    <p class="psub">{e(p['subtitle'])}</p>
+  </div>
+  <div class="pgrid pcols">
+    <div class="psrc"><div class="label">Sources</div><div class="links">{srcs}</div></div>
+    <div class="pc"><div class="label">The Reality Check</div><p class="body">{e(p['reality'])}</p></div>
+    <div class="pc act"><div class="label red">The Leadership Action</div><p class="body">{e(p['action'])}</p></div>
   </div>
 </section>
 """)
     # 03 Calls
     o.append(sechead("03", kick("target", "Weekly Executive Action List"), "The 3 calls to make."))
-    calls = "".join(f'<div class="call hair"><div class="n">{i+1}</div><div class="who">Call with {e(w)}</div><p class="body">{e(t)}</p></div>' for i, (w, t) in enumerate(ed["calls"]))
+    calls = "".join(f'<div class="call hair"><div class="n">{i+1:02d} / {len(ed["calls"]):02d}</div><div class="who">Call with {e(w)}</div><p class="body">{e(t)}</p></div>' for i, (w, t) in enumerate(ed["calls"]))
     o.append(f'<div class="row calls"><div class="l"></div><div class="r">{calls}</div></div>\n')
     # 04 Anti-pattern
     o.append(sechead("04", kick("stop", "The Anti-Pattern · What to stop doing this week", True), ""))
     o.append(f"""<div class="row anti">
-  <div class="l">{mark("stop", 40, True)}</div>
+  <div class="l">{mark("stop", 24, True)}</div>
   <div class="r"><div class="head">{e(ed["antipattern_head"])}</div><p class="body">{e(ed["antipattern_body"])}</p></div>
 </div>
 """)
@@ -199,7 +232,7 @@ def main():
     permalink = f'{SITE}editions/{latest["date"]}/'
     write("index.html", head(f'{TITLE}: {latest["tradeoff_title"]}', latest["summary"], "", permalink) + edition_body(latest, "", permalink))
     # archive
-    rows = "".join(f"""<div class="row arch hair-l"><div class="l"><div class="secnum" style="font-size:28px">{e(ed["date"])}</div><div class="label" style="margin-top:8px">KW {ed["kw"]}</div></div><div class="r"><a class="t" href="../editions/{ed["date"]}/">{e(ed["tradeoff_title"])}</a><p class="body small" style="margin-top:8px">{e(ed["summary"])}</p></div></div>
+    rows = "".join(f"""<div class="row arch hair-l"><div class="l"><div class="adate">{e(ed["date"])}</div><div class="label" style="margin-top:8px">KW {ed["kw"]}</div></div><div class="r"><a class="t" href="../editions/{ed["date"]}/">{e(ed["tradeoff_title"])}</a><p class="body small" style="margin-top:8px">{e(ed["summary"])}</p></div></div>
 """ for ed in eds)
     write("archive/index.html", head(f"Archive · {TITLE}", "All editions of the " + TITLE + ".", "../", SITE + "archive/", "website")
           + mast("../", "All editions", "archive")
